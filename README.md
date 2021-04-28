@@ -10,7 +10,7 @@ This tool takes away that pain.
 
 Really though, it takes one or more paragraphs of text and centres it between a box depicted by asterisks. Nothing more, nothing less.
 
-It also preserves blank lines which other tools
+It also preserves blank lines which other tools don't without great difficulty.
 
 ## Requirements
 
