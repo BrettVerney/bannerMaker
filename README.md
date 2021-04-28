@@ -39,7 +39,7 @@ Creates a file named **banner.txt** containing the following:<br>
 
 ![bannerMaker output example1](https://github.com/wifiwizardofoz/bannerMaker/blob/main/output_example1.png)
 
-Another example:<br><br>
+Another example:<br>
 
 ![bannerMaker output example2](https://github.com/wifiwizardofoz/bannerMaker/blob/main/output_example2.png)
 
