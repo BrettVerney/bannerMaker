@@ -29,7 +29,7 @@ The resulting banner will be output to **banner.txt**
 
 A file named **input.txt** contains the following text:<br><br>
 
-![bannerMaker input example](https://github.com/wifiwizardofoz/bannerMaker/blob/main/input_example1.png)<br>
+![bannerMaker input example1](https://github.com/wifiwizardofoz/bannerMaker/blob/main/input_example1.png)<br>
 
 Executing the script and specifying the **input.txt** file as an argument:
 
@@ -37,11 +37,15 @@ Executing the script and specifying the **input.txt** file as an argument:
 
 Creates a file named **banner.txt** containing the following:<br><br>
 
-![bannerMaker output example](https://github.com/wifiwizardofoz/bannerMaker/blob/main/output_example1.png)
+![bannerMaker output example1](https://github.com/wifiwizardofoz/bannerMaker/blob/main/output_example1.png)
+
+Another example:<br><br>
+
+![bannerMaker output example2](https://github.com/wifiwizardofoz/bannerMaker/blob/main/output_example2.png)
 
 ## Customisation
 
-The script uses safe box width and text padding values by default. But these can be modified within the script itself. It is best to use even integers:
+The script uses box width and text padding values that are considered safe for most terminal CLI appliances by default. These can be modified within the script itself. It is best to use even integers:
 ```
 box_width = int(76)
 padding = int(4)
