@@ -43,6 +43,8 @@ Another example:<br>
 
 ![bannerMaker output example2](https://github.com/wifiwizardofoz/bannerMaker/blob/main/output_example2.png)
 
+The whitespace is preserved by utilising 'space' characters instead of tabs so that the output can copied and pasted directly to the CLI or config file as is.
+
 ## Customisation
 
 The script uses box width and text padding values that are considered safe for most terminal CLI appliances by default. These can be modified within the script itself. It is best to use even integers:
