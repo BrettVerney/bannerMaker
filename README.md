@@ -27,7 +27,7 @@ The resulting banner will be output to **banner.txt**
 
 ## Example
 
-A file named **input.txt** contains the following text:<br><br>
+A file named **input.txt** contains the following text:<br>
 
 ![bannerMaker input example1](https://github.com/wifiwizardofoz/bannerMaker/blob/main/input_example1.png)<br>
 
@@ -35,7 +35,7 @@ Executing the script and specifying the **input.txt** file as an argument:
 
 ```python bannerMaker.py input.txt```
 
-Creates a file named **banner.txt** containing the following:<br><br>
+Creates a file named **banner.txt** containing the following:<br>
 
 ![bannerMaker output example1](https://github.com/wifiwizardofoz/bannerMaker/blob/main/output_example1.png)
 
