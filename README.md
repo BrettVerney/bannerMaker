@@ -52,7 +52,7 @@ The script uses box width and text padding values that are considered safe for m
 box_width = int(76)
 padding = int(4)
 ```
-You can also modify the heeading at the top of the banner:
+You can also modify the heading at the top of the banner:
 ```
 heading = ('WARNING')
 ```
