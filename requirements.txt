@@ -1,1 +1,1 @@
-parawrap==1.0
+parawrap>=1.0
