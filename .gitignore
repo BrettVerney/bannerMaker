@@ -23,3 +23,6 @@ bannerMaker_env/
 *_BASE_*.txt
 *_LOCAL_*.txt
 *_REMOTE_*.txt
+
+### File Output ###
+banner.txt
