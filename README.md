@@ -3,7 +3,7 @@
 Create tidy text based banners for CLI based systems, servers and appliances.
 
 **Author:** Brett Verney</br>
-**Version:** v0.1 | 28-04-2021
+**Version:** v1.0 | 30-06-2023
 
 As a Network Engineer I feel I have wasted far too many hours trying to centre text while creating Message of the Day and Authentication Failure banners for CLI based network infrastructure i.e. Cisco and Aruba.
 
