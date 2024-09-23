@@ -1,60 +1,107 @@
 # Script by Brett Verney (@wifiwizardofoz)
-# Version: v1.1 | 18-09-2023
+# Version: v1.2 | 29-07-2024
 
 import os
 import sys
 import parawrap
 
-def main():
+def print_error_and_exit(message, example_usage):
+    """Prints an error message and exits the script."""
+    print(f"\nError: {message}\n")
+    print(f"Example: {example_usage}\n")
+    sys.exit(1)
 
-    # Character width of box (must be even integer)
+def read_file(file_path):
+    """Reads the content of the file specified by file_path."""
+    try:
+        with open(file_path, 'r') as file:
+            return file.read()
+    except FileNotFoundError:
+        # Handle file not found error
+        print_error_and_exit(f"The file '{file_path}' was not found in the current working directory.",
+                             "Please provide a valid file path.")
+
+def create_banner_text(contents, box_width, padding, heading):
+    """
+    Creates the banner text from the given contents, box width, padding, and heading.
+
+    Args:
+        contents (str): The content to be wrapped inside the banner.
+        box_width (int): The width of the banner box.
+        padding (int): The padding between text and box borders.
+        heading (str): The heading text for the banner.
+
+    Returns:
+        list: A list of strings representing the lines of the banner.
+    """
+    # Calculate the width for the text inside the box
+    text_width = box_width - padding - 2  # -2 for the '|' on either side
+
+    # Format heading with single space on either side
+    heading = f" {heading} "
+    total_dashes = box_width - len(heading) - 2  # -2 for the '+' characters
+    heading_line = f"+{'-' * (total_dashes // 2)}{heading}{'-' * (total_dashes // 2 + total_dashes % 2)}+"
+
+    # Initialize the list to hold each line of the banner
+    banner_lines = [
+        heading_line,  # Top border with heading
+        f"|{' ' * (box_width - 2)}|"  # Empty line below heading
+    ]
+
+    # Wrap the contents to fit within the text width
+    for line in parawrap.wrap(contents, width=text_width):
+        if line.strip():  # Check if the line is not empty or just whitespace
+            # Calculate the remaining space for padding
+            remaining_space = box_width - 2 - len(line)
+            padding_each_side = remaining_space // 2
+            extra_space = remaining_space % 2
+
+            # Create the padded line
+            padded_line = f"{' ' * padding_each_side}{line}{' ' * (padding_each_side + extra_space)}"
+        else:
+            # For empty lines, fill with spaces to align vertical bars
+            padded_line = ' ' * (box_width - 2)
+
+        # Append the formatted line to the banner
+        banner_lines.append(f"|{padded_line}|")
+
+    # Add the empty line and bottom border
+    banner_lines.append(f"|{' ' * (box_width - 2)}|")
+    banner_lines.append(f"+{'-' * (box_width - 2)}+")
+
+    return banner_lines
+
+def write_banner(output_file, banner_lines):
+    with open(output_file, 'w') as outfile:
+        outfile.write("\n".join(banner_lines))
+    print(f"\nSuccess! The banner has been written to {output_file}")
+
+def main():
+    """
+    Main function to read input file, create banner, and write to output file.
+    """
+    # Character width of the box (must be even integer)
     box_width = 76
     # Padding between text width and box (must be even integer)
     padding = 4
     # Banner heading text
     heading = 'WARNING'
 
-    # Define error for argument parsing with example
+    # Validate argument count
     if len(sys.argv) != 2:
-        print(f"\nError: Incorrect usage. Script must be executed using 'python {os.path.basename(__file__)} [input_file]'\n")
-        print(f"Example: 'python {os.path.basename(__file__)} message.txt'\n")
-        return
+        print_error_and_exit("Incorrect usage. Script must be executed using 'python script.py [input_file]'",
+                             f"python {os.path.basename(__file__)} message.txt")
 
-    text_width = box_width - padding - 2  # -2 for the '|' on either side
-    heading = f" {heading} "
-
+    # Read the input file
     infile = sys.argv[1]
-    try:
-        with open(infile, 'r') as f:
-            contents = f.read()
-    except FileNotFoundError:
-        print(f"\nError: The file '{infile}' was not found in the current working directory.\n")
-        return
-    else:
-        output_file = 'banner.txt'
-        with open(output_file, 'wt') as outfile:
-            outfile.write(f"+{'-' * (box_width - 2)}+\n")  # Top border
-            outfile.write(f"|{heading.center(box_width - 2)}|\n")  # Heading
-            outfile.write(f"|{' ' * (box_width - 2)}|\n")  # Empty line below heading
+    contents = read_file(infile)
 
-            for line in parawrap.wrap(contents, width=text_width):
-                if line.strip():  # Check if line is not empty or just whitespace
-                    actual_line_length = len(line)
-                    remaining_space = box_width - 2 - actual_line_length  # -2 for the '|' on either side
-                    padding_each_side = remaining_space // 2
-                    extra_space = remaining_space % 2  # If remaining space is odd, add 1 space at the end
+    # Create the banner text
+    banner_lines = create_banner_text(contents, box_width, padding, heading)
 
-                    padded_line = ' ' * padding_each_side + line + ' ' * padding_each_side + ' ' * extra_space
-                else:
-                    padded_line = ' ' * (box_width - 2)  # For empty lines, fill with spaces to align vertical bars
+    # Write the banner to the output file
+    write_banner('banner.txt', banner_lines)
 
-                outfile.write(f"|{padded_line}|\n")
-
-            outfile.write(f"|{' ' * (box_width - 2)}|\n")  # Empty line below text
-            outfile.write(f"+{'-' * (box_width - 2)}+\n")  # Bottom border
-
-        print(f"\nSuccess! The banner has been written to {output_file}")
-
-# Start Here
+# Start the script execution
 if __name__ == "__main__":
     main()
