@@ -26,3 +26,6 @@ bannerMaker_env/
 
 ### File Output ###
 banner.txt
+
+### Python cache ###
+__pycache__/
